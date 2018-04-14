@@ -1,22 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+   
     <title>Result</title>
+	<!--<link rel="stylesheet" type="text/css" href="ss.css"> --> 
+	<style>
+	form {
+  text-align: center;
+}
 
+div {
+  width: 47%;
+  border: solid 1px;
+  float: left;
+  margin: 5px;
+  padding: 10px;
+}
+
+img {
+	width:45vw;
+  display: block;
+  margin: auto;
+}
+
+.fixed {
+  height: 300px;
+}
+
+.clear {
+  clear: both;
+  border-top: solid 1px;
+}
+</style>
+<script>
+function goBack() {
+    window.history.back();
+}
+</script>
 
   </head>
   <body>
-    
-
+     <h1 align=center> Malaria Parasite Detector</h1>
+	 <h3 class="clear" align=center>Result</h3>
+<div>
 <img src="/{{ input_file }}/{{ filename }}" >
-</br>
-<img src="/{{ output_file }}/{{ filename }}" >
+Input Image
+</div>
 
+<div>
+<img src="/{{ output_file }}/{{ filename }}"> 
+Processed Image
+</div>
 
-
+<p class="clear">
+<h4>Result Stats:</h4>
+Red Cells Count:{{red}} </br>
+ Malaria Cells Count:{{malaria}}
+</p>
+<button onclick="goBack()">Go Back</button>
   </body>
 </html>

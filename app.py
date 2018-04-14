@@ -9,12 +9,6 @@ import detector
 UPLOAD_FOLDER = 'static/uploads/'
 PROCESS_FOLDER = 'static/processed/'
 
-GALLERY_RAW_FOLDER = 'static/gallery/'
-GALLERY_PROC_FOLDER = 'static/gallery/'
-
-THICK_GALLERY = 'imgThickBlood'
-THIN_GALLERY = 'imgThinBlood'
-
 STATS_EXTENSION = '.stats'
 
 ALLOWED_EXTENSIONS = set(['jpg','jpeg','png','gif','bmp', 'tif','webp'])
@@ -23,11 +17,7 @@ threshold = 50
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['PROCESS_FOLDER'] = PROCESS_FOLDER
-app.config['GALLERY_RAW_FOLDER'] = GALLERY_RAW_FOLDER
-app.config['GALLERY_PROC_FOLDER'] = GALLERY_PROC_FOLDER
-app.config['THICK_GALLERY'] = THICK_GALLERY
-app.config['THIN_GALLERY'] = THIN_GALLERY
-app.config['STATS_EXTENSION'] = STATS_EXTENSION
+app.config['STATS_EXTENSION']=STATS_EXTENSION
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 app.secret_key = 'my secret malaria key'
 app.config['DEBUG'] = False
@@ -51,10 +41,19 @@ def index():
 			outfile = os.path.join(app.config['PROCESS_FOLDER'], filename)
 			file.save(infile)
 			detector.process(infile, outfile, str(threshold))
-			#red, malaria = get_stats(outpath, filename)
-			return render_template('result.html', input_file=inpath, output_file=outpath, filename=filename)
+			red, malaria = get_stats(outpath, filename)
+			return render_template('result.html', input_file=inpath, output_file=outpath, filename=filename,red=red,malaria=malaria)
 	else:
 		return render_template('index.html')
+
+def get_stats(outpath,filename):
+        statsfile = outpath+'/'+filename+app.config['STATS_EXTENSION']
+        red=0
+        malaria=0
+        with open(statsfile,mode='r') as f:
+                  red=f.readline()
+                  malaria=f.readline()
+        return red,malaria
 
 if __name__ =="__main__":
 	app.run()

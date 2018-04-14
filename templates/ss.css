@@ -1,0 +1,25 @@
+form {
+  text-align: center;
+}
+
+div {
+  width: 25%;
+  border: solid 1px;
+  float: left;
+  margin: 5px;
+  padding: 10px;
+}
+
+img {
+  display: block;
+  margin: auto;
+}
+
+.fixed {
+  height: 300px;
+}
+
+.clear {
+  clear: both;
+  border-top: solid 1px;
+}

@@ -17,7 +17,7 @@ def process(inpath, outpath, tolerance):
    original_image = cv2.imread(inpath)
    tolerance = int(tolerance) * 0.01
 
-   #Get properties
+   
    width, height, channels = original_image.shape
 
    color_image = original_image.copy()
@@ -46,7 +46,7 @@ def process(inpath, outpath, tolerance):
    #Red cells
    gray_image = cv2.adaptiveThreshold(gray_image, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 85, 4)
 
-   contours, hierarchy = cv2.findContours(gray_image, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
+   x, contours, hierarchy = cv2.findContours(gray_image, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 
    c2 = [i for i in contours if cv2.boundingRect(i)[3] > 15]
    cv2.drawContours(color_image, c2, -1, (0, 0, 255), 1)
@@ -62,7 +62,7 @@ def process(inpath, outpath, tolerance):
    #Malaria cells
    gray_image = cv2.inRange(original_image, np.array([sloop_blue, sloop_green, sloop_red]), np.array([255, 255, 255]))
 
-   contours, hierarchy = cv2.findContours(gray_image, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
+   x, contours, hierarchy = cv2.findContours(gray_image, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 
    c2 = [i for i in contours if cv2.boundingRect(i)[3] > 8]
    cv2.drawContours(color_image, c2, -1, (0, 0, 0), 1)
@@ -75,17 +75,10 @@ def process(inpath, outpath, tolerance):
       xc, yc, wc, hc = cv2.boundingRect(c)
       cv2.rectangle(color_image, (xc, yc), (xc + wc, yc + hc), (0, 0, 0), 1)
 
-   #cv2.imshow('image',color_image)
-   #cv2.waitKey(0)
-   #cv2.destroyAllWindows()
-   #return color_image
-   #Write image
    cv2.imwrite(outpath, color_image)
-   #print countRedCells,countMalaria;
+   
 
    #Write statistics
-   #with open(outpath + '.stats', mode='w') as f:
-	#f.write(str(countRedCells) + '\n')
-	#f.write(str(countMalaria) + '\n')
-
-#process('static\uploads\infectedimage.jpg','out.jpg','30');
+   with open(outpath + '.stats', mode='w') as f:
+	f.write(str(countRedCells) + '\n')
+	f.write(str(countMalaria) + '\n')

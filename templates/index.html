@@ -2,33 +2,48 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+   
+   
     <title>Malaria Parasite Detector</title>
 
+	<!-- <link rel="stylesheet" type="text/css" href="ss.css"> -->
+	<style>
+	form {
+  text-align: center;
+}
+
+
+
+.fixed {
+  height: 300px;
+}
+
+.clear {
+  clear: both;
+  border-top: solid 1px;
+}
+</style>
 
   </head>
   <body>
-    
+    <h1 align=center> Malaria Parasite Detector</h1>
 
 
   
+<h3 align=center class="clear">Upload a image of infected red blood cells to proceed.</h3>
 
-  <div class="container"> 
-
-    
-
-        <form method="post" action="" enctype=multipart/form-data>
-          <div class="form-group">
-            <label for="inputFile">File input</label>
+<br/>
+  
+        <form method="post" action="" enctype=multipart/form-data >
+         
+            <!-- <label for="inputFile" align=center>File</label> -->
             <input type="file" name="file">
-          </div>
-          <button type="submit" class="btn btn-primary">Upload and Process</button>
+			
+         
+		  <br/>
+		  <br/>
+          <button type="submit">Submit</button> <button type="reset">Reset</button>
         </form>
-
-
-  </div
 
 
 
