@@ -46,7 +46,7 @@ def process(inpath, outpath, tolerance):
    #Red cells
    gray_image = cv2.adaptiveThreshold(gray_image, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 85, 4)
 
-   contours, hierarchy = cv2.findContours(gray_image, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
+   x, contours, hierarchy = cv2.findContours(gray_image, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 
    c2 = [i for i in contours if cv2.boundingRect(i)[3] > 15]
    cv2.drawContours(color_image, c2, -1, (0, 0, 255), 1)
@@ -62,7 +62,7 @@ def process(inpath, outpath, tolerance):
    #Malaria cells
    gray_image = cv2.inRange(original_image, np.array([sloop_blue, sloop_green, sloop_red]), np.array([255, 255, 255]))
 
-   contours, hierarchy = cv2.findContours(gray_image, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
+   x, contours, hierarchy = cv2.findContours(gray_image, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 
    c2 = [i for i in contours if cv2.boundingRect(i)[3] > 8]
    cv2.drawContours(color_image, c2, -1, (0, 0, 0), 1)
