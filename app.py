@@ -35,30 +35,26 @@ tolerance = 50
 
 @app.route('/', methods=['GET','POST'])
 def index():
-   if request.method == 'POST':
-      # check if the post request has the file part
-      if 'file' not in request.files:
-         flash('No file part')
-         return redirect(request.url)
-      file = request.files['file']
-      # if user does not select file, browser also
-      # submit a empty part without filename
-      if file.filename == '':
-         flash('No selected file')
-         return redirect(request.url)
-      else : #file and allowed_file(file.filename)
-		filename = secure_filename(file.filename)
-		inpath = app.config['UPLOAD_FOLDER']
-		outpath = app.config['PROCESS_FOLDER']
-		infile = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-		outfile = os.path.join(app.config['PROCESS_FOLDER'], filename)
-		file.save(infile)
-		detector.process(infile, outfile, str(threshold))
-		#red, malaria = get_stats(outpath, filename)
-		return render_template('result.html', input_file=inpath, output_file=outpath, filename=filename)
-   else:
-      return render_template('index.html')
+	if request.method == 'POST':
+		if 'file' not in request.files:
+			flash('No file part')
+			return redirect(request.url)
+		file = request.files['file']
+		if file.filename == '':
+			flash('No selected file')
+			return redirect(request.url)
+		else :
+			filename = secure_filename(file.filename)
+			inpath = app.config['UPLOAD_FOLDER']
+			outpath = app.config['PROCESS_FOLDER']
+			infile = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+			outfile = os.path.join(app.config['PROCESS_FOLDER'], filename)
+			file.save(infile)
+			detector.process(infile, outfile, str(threshold))
+			#red, malaria = get_stats(outpath, filename)
+			return render_template('result.html', input_file=inpath, output_file=outpath, filename=filename)
+	else:
+		return render_template('index.html')
 
-	
 if __name__ =="__main__":
 	app.run()
