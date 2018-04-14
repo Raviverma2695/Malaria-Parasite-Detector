@@ -75,16 +75,17 @@ def process(inpath, outpath, tolerance):
       xc, yc, wc, hc = cv2.boundingRect(c)
       cv2.rectangle(color_image, (xc, yc), (xc + wc, yc + hc), (0, 0, 0), 1)
 
-   cv2.imshow('image',color_image)
-   cv2.waitKey(0)
-   cv2.destroyAllWindows()
+   #cv2.imshow('image',color_image)
+   #cv2.waitKey(0)
+   #cv2.destroyAllWindows()
+   #return color_image
    #Write image
    cv2.imwrite(outpath, color_image)
-   print countRedCells,countMalaria;
+   #print countRedCells,countMalaria;
 
    #Write statistics
    with open(outpath + '.stats', mode='w') as f:
 	f.write(str(countRedCells) + '\n')
 	f.write(str(countMalaria) + '\n')
 
-process('infectedimage.jpg','out.jpg','30');
+#process('static\uploads\infectedimage.jpg','out.jpg','30');
