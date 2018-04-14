@@ -84,8 +84,8 @@ def process(inpath, outpath, tolerance):
    #print countRedCells,countMalaria;
 
    #Write statistics
-   with open(outpath + '.stats', mode='w') as f:
-	f.write(str(countRedCells) + '\n')
-	f.write(str(countMalaria) + '\n')
+   #with open(outpath + '.stats', mode='w') as f:
+	#f.write(str(countRedCells) + '\n')
+	#f.write(str(countMalaria) + '\n')
 
 #process('static\uploads\infectedimage.jpg','out.jpg','30');
